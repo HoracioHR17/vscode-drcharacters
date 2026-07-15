@@ -1,29 +1,14 @@
 import { PetColor, PetSize, PetSpeed, PetType } from '../common/types';
-import { Bunny } from './pets/bunny';
-import { Cat } from './pets/cat';
-import { Chicken } from './pets/chicken';
-import { Clippy } from './pets/clippy';
-import { Cockatiel } from './pets/cockatiel';
-import { Crab } from './pets/crab';
-import { Deno } from './pets/deno';
-import { Dog } from './pets/dog';
-import { Fox } from './pets/fox';
-import { Frog } from './pets/frog';
-import { Horse } from './pets/horse';
-import { Monkey } from './pets/monkey';
-import { Mod } from './pets/mod';
-import { Morph } from './pets/morph';
-import { Panda } from './pets/panda';
-import { Rat } from './pets/rat';
-import { Rocky } from './pets/rocky';
-import { RubberDuck } from './pets/rubberduck';
-import { Skeleton } from './pets/skeleton';
-import { Snail } from './pets/snail';
-import { Snake } from './pets/snake';
-import { Squirrel } from './pets/squirrel';
-import { Totoro } from './pets/totoro';
-import { Turtle } from './pets/turtle';
-import { Zappy } from './pets/zappy';
+import { Kris } from './pets/kris';
+import {
+    Jevil,
+    Lancer,
+    Noelle,
+    Ralsei,
+    Spamton,
+    Susie,
+    Tenna,
+} from './pets/deltarune';
 import { IPetType } from './states';
 
 export class PetElement {
@@ -201,56 +186,22 @@ export function createPet(
     ] = [el, collision, speech, size, left, bottom, petRoot, floor, name];
 
     switch (petType) {
-        case PetType.bunny:
-            return new Bunny(...standardPetArguments, PetSpeed.veryFast);
-        case PetType.cat:
-            return new Cat(...standardPetArguments, PetSpeed.normal);
-        case PetType.chicken:
-            return new Chicken(...standardPetArguments, PetSpeed.normal);
-        case PetType.deno:
-            return new Deno(...standardPetArguments, PetSpeed.slow);
-        case PetType.dog:
-            return new Dog(...standardPetArguments, PetSpeed.normal);
-        case PetType.fox:
-            return new Fox(...standardPetArguments, PetSpeed.fast);
-        case PetType.frog:
-            return new Frog(...standardPetArguments, PetSpeed.normal);
-        case PetType.crab:
-            return new Crab(...standardPetArguments, PetSpeed.slow);
-        case PetType.clippy:
-            return new Clippy(...standardPetArguments, PetSpeed.slow);
-        case PetType.mod:
-            return new Mod(...standardPetArguments, PetSpeed.normal);
-        case PetType.totoro:
-            return new Totoro(...standardPetArguments, PetSpeed.normal);
-        case PetType.snail:
-            return new Snail(...standardPetArguments, PetSpeed.verySlow);
-        case PetType.snake:
-            return new Snake(...standardPetArguments, PetSpeed.verySlow);
-        case PetType.squirrel:
-            return new Squirrel(...standardPetArguments, PetSpeed.veryFast);
-        case PetType.rubberduck:
-            return new RubberDuck(...standardPetArguments, PetSpeed.fast);
-        case PetType.zappy:
-            return new Zappy(...standardPetArguments, PetSpeed.veryFast);
-        case PetType.rocky:
-            return new Rocky(...standardPetArguments, PetSpeed.still);
-        case PetType.cockatiel:
-            return new Cockatiel(...standardPetArguments, PetSpeed.normal);
-        case PetType.monkey:
-            return new Monkey(...standardPetArguments, PetSpeed.normal);
-        case PetType.rat:
-            return new Rat(...standardPetArguments, PetSpeed.normal);
-        case PetType.turtle:
-            return new Turtle(...standardPetArguments, PetSpeed.verySlow);
-        case PetType.horse:
-            return new Horse(...standardPetArguments, PetSpeed.normal);
-        case PetType.panda:
-            return new Panda(...standardPetArguments, PetSpeed.slow);
-        case PetType.morph:
-            return new Morph(...standardPetArguments, PetSpeed.normal);
-        case PetType.skeleton:
-            return new Skeleton(...standardPetArguments, PetSpeed.normal);
+        case PetType.kris:
+            return new Kris(...standardPetArguments, PetSpeed.normal);
+        case PetType.lancer:
+            return new Lancer(...standardPetArguments, PetSpeed.fast);
+        case PetType.ralsei:
+            return new Ralsei(...standardPetArguments, PetSpeed.normal);
+        case PetType.noelle:
+            return new Noelle(...standardPetArguments, PetSpeed.normal);
+        case PetType.susie:
+            return new Susie(...standardPetArguments, PetSpeed.fast);
+        case PetType.spamton:
+            return new Spamton(...standardPetArguments, PetSpeed.veryFast);
+        case PetType.jevil:
+            return new Jevil(...standardPetArguments, PetSpeed.veryFast);
+        case PetType.tenna:
+            return new Tenna(...standardPetArguments, PetSpeed.fast, 2);
         default:
             throw new InvalidPetException("Pet type doesn't exist");
     }
@@ -258,56 +209,22 @@ export function createPet(
 
 export function availableColors(petType: PetType): PetColor[] {
     switch (petType) {
-        case PetType.bunny:
-            return Bunny.possibleColors;
-        case PetType.cat:
-            return Cat.possibleColors;
-        case PetType.chicken:
-            return Chicken.possibleColors;
-        case PetType.morph:
-            return Morph.possibleColors;
-        case PetType.dog:
-            return Dog.possibleColors;
-        case PetType.deno:
-            return Deno.possibleColors;
-        case PetType.fox:
-            return Fox.possibleColors;
-        case PetType.frog:
-            return Frog.possibleColors;
-        case PetType.crab:
-            return Crab.possibleColors;
-        case PetType.clippy:
-            return Clippy.possibleColors;
-        case PetType.mod:
-            return Mod.possibleColors;
-        case PetType.monkey:
-            return Monkey.possibleColors;
-        case PetType.totoro:
-            return Totoro.possibleColors;
-        case PetType.snail:
-            return Snail.possibleColors;
-        case PetType.snake:
-            return Snake.possibleColors;
-        case PetType.squirrel:
-            return Squirrel.possibleColors;
-        case PetType.rubberduck:
-            return RubberDuck.possibleColors;
-        case PetType.zappy:
-            return Zappy.possibleColors;
-        case PetType.rocky:
-            return Rocky.possibleColors;
-        case PetType.cockatiel:
-            return Cockatiel.possibleColors;
-        case PetType.rat:
-            return Rat.possibleColors;
-        case PetType.turtle:
-            return Turtle.possibleColors;
-        case PetType.horse:
-            return Horse.possibleColors;
-        case PetType.panda:
-            return Panda.possibleColors;
-        case PetType.skeleton:
-            return Skeleton.possibleColors;
+        case PetType.kris:
+            return Kris.possibleColors;
+        case PetType.lancer:
+            return Lancer.possibleColors;
+        case PetType.ralsei:
+            return Ralsei.possibleColors;
+        case PetType.noelle:
+            return Noelle.possibleColors;
+        case PetType.susie:
+            return Susie.possibleColors;
+        case PetType.spamton:
+            return Spamton.possibleColors;
+        case PetType.jevil:
+            return Jevil.possibleColors;
+        case PetType.tenna:
+            return Tenna.possibleColors;
         default:
             throw new InvalidPetException("Pet type doesn't exist");
     }

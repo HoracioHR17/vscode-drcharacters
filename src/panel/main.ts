@@ -176,21 +176,16 @@ function recoverState(
 
     var recoveryMap: Map<IPetType, PetElementState> = new Map();
     state?.petStates?.forEach((p) => {
-        // Fixes a bug related to duck animations
-        if ((p.petType as string) === 'rubber duck') {
-            (p.petType as string) = 'rubber-duck';
-        }
-
         try {
             var newPet = addPetToPanel(
-                p.petType ?? PetType.cat,
+                p.petType ?? PetType.kris,
                 basePetUri,
-                p.petColor ?? PetColor.brown,
+                p.petColor ?? PetColor.darkworld,
                 petSize,
                 parseInt(p.elLeft ?? '0'),
                 parseInt(p.elBottom ?? '0'),
                 floor,
-                p.petName ?? randomName(p.petType ?? PetType.cat),
+                p.petName ?? randomName(p.petType ?? PetType.kris),
                 stateApi,
             );
             allPets.push(newPet);

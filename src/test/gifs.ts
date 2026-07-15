@@ -1,162 +1,37 @@
 import * as fs from 'fs';
 
 const pets: { [key: string]: { colors: string[]; states: string[] } } = {
-    bunny: {
-        colors: ['white', 'purple', 'gray'],
-        states: [
-            'lie',
-            'idle',
-            'run',
-            'swipe',
-            'walk',
-            'walk_fast',
-            'with_ball',
-            'stand',
-        ],
-    },
-    cat: {
-        colors: ['black', 'brown', 'gray', 'lightbrown', 'orange', 'white'],
-        states: [
-            'fall_from_grab',
-            'idle',
-            'land',
-            'run',
-            'swipe',
-            'walk',
-            'walk_fast',
-            'wallclimb',
-            'wallgrab',
-            'with_ball',
-        ],
-    },
-    chicken: {
-        colors: ['white', 'brown'],
+    kris: {
+        colors: ['darkworld'],
         states: ['idle', 'run', 'swipe', 'walk', 'walk_fast', 'with_ball'],
     },
-    morph: {
-        colors: ['purple'],
+    lancer: {
+        colors: ['darkworld'],
         states: ['idle', 'run', 'swipe', 'walk', 'walk_fast', 'with_ball'],
     },
-    clippy: {
-        colors: ['black', 'brown', 'green', 'yellow'],
+    ralsei: {
+        colors: ['darkworld'],
         states: ['idle', 'run', 'swipe', 'walk', 'walk_fast', 'with_ball'],
     },
-    cockatiel: {
-        colors: ['gray', 'brown'],
+    noelle: {
+        colors: ['darkworld'],
         states: ['idle', 'run', 'swipe', 'walk', 'walk_fast', 'with_ball'],
     },
-    crab: {
-        colors: ['red'],
+    susie: {
+        colors: ['darkworld'],
         states: ['idle', 'run', 'swipe', 'walk', 'walk_fast', 'with_ball'],
     },
-    deno: {
-        colors: ['green'],
-        states: ['idle', 'run', 'swipe', 'walk', 'with_ball'],
-    },
-    dog: {
-        colors: ['black', 'brown', 'red', 'white', 'akita'],
-        states: [
-            'idle',
-            'lie',
-            'run',
-            'swipe',
-            'walk',
-            'walk_fast',
-            'with_ball',
-        ],
-    },
-    fox: {
-        colors: ['red', 'white'],
+    spamton: {
+        colors: ['darkworld'],
         states: ['idle', 'run', 'swipe', 'walk', 'walk_fast', 'with_ball'],
     },
-    frog: {
-        colors: ['green'],
+    jevil: {
+        colors: ['darkworld'],
         states: ['idle', 'run', 'swipe', 'walk', 'walk_fast', 'with_ball'],
     },
-    mod: {
-        colors: ['purple'],
+    tenna: {
+        colors: ['darkworld'],
         states: ['idle', 'run', 'swipe', 'walk', 'walk_fast', 'with_ball'],
-    },
-    panda: {
-        colors: ['black', 'brown'],
-        states: [
-            'idle',
-            'lie',
-            'run',
-            'swipe',
-            'walk',
-            'walk_fast',
-            'with_ball',
-        ],
-    },
-    rocky: {
-        colors: ['gray'],
-        states: ['idle', 'run', 'swipe', 'walk', 'walk_fast'],
-    },
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    'rubber-duck': {
-        colors: ['yellow'],
-        states: ['idle', 'run', 'swipe', 'walk', 'walk_fast', 'with_ball'],
-    },
-    snail: {
-        colors: ['brown'],
-        states: ['idle', 'run', 'swipe', 'walk', 'walk_fast', 'with_ball'],
-    },
-    snake: {
-        colors: ['green'],
-        states: ['idle', 'run', 'swipe', 'walk', 'walk_fast', 'with_ball'],
-    },
-    totoro: {
-        colors: ['gray'],
-        states: [
-            'fall_from_grab',
-            'idle',
-            'jump',
-            'land',
-            'lie',
-            'run',
-            'swipe',
-            'walk',
-            'wallclimb',
-            'wallgrab',
-            'with_ball',
-        ],
-    },
-    zappy: {
-        colors: ['yellow'],
-        states: ['idle', 'run', 'swipe', 'walk', 'walk_fast', 'with_ball'],
-    },
-    rat: {
-        colors: ['gray', 'white', 'brown'],
-        states: ['idle', 'run', 'swipe', 'walk', 'walk_fast', 'with_ball'],
-    },
-    turtle: {
-        colors: ['green', 'orange'],
-        states: ['idle', 'run', 'walk', 'lie', 'with_ball'],
-    },
-    horse: {
-        colors: [
-            'brown',
-            'white',
-            'black',
-            'socks_beige',
-            'socks_black',
-            'socks_brown',
-            'paint_beige',
-            'paint_black',
-            'paint_brown',
-            'magical',
-            'warrior',
-        ],
-        states: [
-            'idle',
-            'run',
-            'swipe',
-            'walk',
-            'walk_fast',
-            'with_ball',
-            'stand',
-        ],
     },
 };
 

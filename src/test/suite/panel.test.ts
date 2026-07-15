@@ -88,7 +88,7 @@ class MockState implements VscodeStateApi {
 mockPanelWindow();
 
 import * as panel from '../../panel/main';
-import { Cat } from '../../panel/pets/cat';
+import { Kris } from '../../panel/pets/kris';
 
 suite('Pets Test Suite', () => {
     void vscode.window.showInformationMessage('Start all tests.');
@@ -103,7 +103,7 @@ suite('Pets Test Suite', () => {
             'div',
         ) as HTMLDivElement;
         const testPet = pets.createPet(
-            'cat',
+            'kris',
             petImageEl,
             petDivEl,
             petSpeechEl,
@@ -114,8 +114,8 @@ suite('Pets Test Suite', () => {
             0,
             'Jerry',
         );
-        assert.ok(testPet instanceof Cat);
-        assert.equal(testPet.emoji, '🐱');
+        assert.ok(testPet instanceof Kris);
+        assert.equal(testPet.emoji, '💙');
         assert.equal(testPet.name, 'Jerry');
 
         const testPetElement = new pets.PetElement(
@@ -123,11 +123,11 @@ suite('Pets Test Suite', () => {
             petDivEl,
             petSpeechEl,
             testPet,
-            PetColor.brown,
-            PetType.cat,
+            PetColor.darkworld,
+            PetType.kris,
         );
-        assert.strictEqual(testPetElement.color, PetColor.brown);
-        assert.strictEqual(testPetElement.type, PetType.cat);
+        assert.strictEqual(testPetElement.color, PetColor.darkworld);
+        assert.strictEqual(testPetElement.type, PetType.kris);
 
         assert.strictEqual(collection.locate('Jerry'), undefined);
 
@@ -136,6 +136,45 @@ suite('Pets Test Suite', () => {
 
         collection.remove(testPetElement);
         assert.strictEqual(collection.locate('Jerry'), undefined);
+    });
+
+    test('Tenna keeps the intended relative scale', () => {
+        const createElementSet = () => ({
+            image: global.document.createElement('image') as HTMLImageElement,
+            collision: global.document.createElement('div') as HTMLDivElement,
+            speech: global.document.createElement('div') as HTMLDivElement,
+        });
+        const krisElements = createElementSet();
+        const tennaElements = createElementSet();
+        pets.createPet(
+            PetType.kris,
+            krisElements.image,
+            krisElements.collision,
+            krisElements.speech,
+            PetSize.medium,
+            0,
+            0,
+            'testPet',
+            0,
+            'Kris',
+        );
+        pets.createPet(
+            PetType.tenna,
+            tennaElements.image,
+            tennaElements.collision,
+            tennaElements.speech,
+            PetSize.medium,
+            0,
+            0,
+            'testPet',
+            0,
+            'Tenna',
+        );
+
+        assert.strictEqual(
+            parseInt(tennaElements.image.style.maxWidth),
+            parseInt(krisElements.image.style.maxWidth) * 2,
+        );
     });
 
     ALL_THEMES.forEach((theme) => {
@@ -147,7 +186,10 @@ suite('Pets Test Suite', () => {
                     String(theme),
                 () => {
                     const mockState = new MockState();
-                    const color = pets.normalizeColor(PetColor.black, petType);
+                    const color = pets.normalizeColor(
+                        PetColor.darkworld,
+                        petType,
+                    );
                     panel.allPets.reset();
                     mockState.reset();
                     panel.petPanelApp(
@@ -219,9 +261,9 @@ suite('Pets Test Suite', () => {
             'https://test.com',
             Theme.none,
             ColorThemeKind.dark,
-            PetColor.black,
+            PetColor.darkworld,
             PetSize.large,
-            PetType.cat,
+            PetType.kris,
             false,
             false,
             mockState,
@@ -245,9 +287,9 @@ suite('Pets Test Suite', () => {
             'https://test.com',
             Theme.none,
             ColorThemeKind.dark,
-            PetColor.black,
+            PetColor.darkworld,
             PetSize.large,
-            PetType.cat,
+            PetType.kris,
             false,
             false,
             mockState,

@@ -20,9 +20,9 @@ const EXTRA_PETS_KEY = 'vscode-pets.extra-pets';
 const EXTRA_PETS_KEY_TYPES = EXTRA_PETS_KEY + '.types';
 const EXTRA_PETS_KEY_COLORS = EXTRA_PETS_KEY + '.colors';
 const EXTRA_PETS_KEY_NAMES = EXTRA_PETS_KEY + '.names';
-const DEFAULT_PET_SCALE = PetSize.nano;
-const DEFAULT_COLOR = PetColor.brown;
-const DEFAULT_PET_TYPE = PetType.cat;
+const DEFAULT_PET_SCALE = PetSize.medium;
+const DEFAULT_COLOR = PetColor.darkworld;
+const DEFAULT_PET_TYPE = PetType.kris;
 const DEFAULT_POSITION = ExtPosition.panel;
 const DEFAULT_THEME = Theme.none;
 
@@ -547,8 +547,13 @@ export function activate(context: vscode.ExtensionContext) {
             return iconUri;
         }
 
-        // No custom icon found, use fallback
-        return vscode.Uri.joinPath(context.extensionUri, 'media', 'cat.svg');
+        // No custom icon found, use Kris as the Deltarune fallback.
+        return vscode.Uri.joinPath(
+            context.extensionUri,
+            'media',
+            PetType.kris,
+            'icon.png',
+        );
     };
 
     context.subscriptions.push(

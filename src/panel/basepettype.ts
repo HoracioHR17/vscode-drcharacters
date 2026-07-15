@@ -47,6 +47,7 @@ export abstract class BasePetType implements IPetType {
     private _name: string;
     private _speed: number;
     private _size: PetSize;
+    private _visualScale: number;
     protected _climbSpeed: number = 1;
     protected _climbHeight: number = 100;
     protected _fallSpeed: number = 5;
@@ -62,6 +63,7 @@ export abstract class BasePetType implements IPetType {
         floor: number,
         name: string,
         speed: number,
+        visualScale: number = 1,
     ) {
         this.el = spriteElement;
         this.collision = collisionElement;
@@ -70,6 +72,7 @@ export abstract class BasePetType implements IPetType {
         this._floor = floor;
         this._left = left;
         this._bottom = bottom;
+        this._visualScale = visualScale;
         this.initSprite(size, left, bottom);
         this.currentStateEnum = this.sequence.startingState;
         this.currentState = resolveState(this.currentStateEnum, this);
@@ -123,17 +126,19 @@ export abstract class BasePetType implements IPetType {
     }
 
     calculateSpriteWidth(size: PetSize): number {
+        let baseWidth: number;
         if (size === PetSize.nano) {
-            return 30;
+            baseWidth = 30;
         } else if (size === PetSize.small) {
-            return 40;
+            baseWidth = 40;
         } else if (size === PetSize.medium) {
-            return 55;
+            baseWidth = 55;
         } else if (size === PetSize.large) {
-            return 110;
+            baseWidth = 110;
         } else {
-            return 30; // Shrug
+            baseWidth = 30;
         }
+        return baseWidth * this._visualScale;
     }
 
     positionBottom(bottom: number): void {

@@ -1,19 +1,16 @@
-site_name: VS Code Pets
+site_name: Deltarune Characters for VS Code
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
-  - Pets: pets.md
+  - Characters: pets.md
   - Themes: themes.md
-  - Changelog: CHANGELOG.md
   - Credits: credits.md
   - Contributing: contributing.md
 
 theme:
   name: material
-  logo: source/logo.png
   features:
     - content.code.copy
-repo_url: https://github.com/tonybaloney/vscode-pets
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true

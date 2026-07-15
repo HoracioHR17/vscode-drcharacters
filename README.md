@@ -1,98 +1,50 @@
-<div align='center'>
+# Deltarune Characters for VS Code
 
-# VS Code Pets
+A Deltarune-focused fork of VS Code Pets. It places animated Deltarune
+characters in the Explorer or panel while you work.
 
-![icon](https://github.com/tonybaloney/vscode-pets/raw/main/icon.png)
-</div>    
+## Characters
 
-<p align="center">
-    Puts a small, bored cat, an enthusiastic dog, a feisty snake, a rubber duck, or Clippy 📎 in your code editor to boost productivity.
-    <br>
-    <br>
-    <a href="https://github.com/tonybaloney/vscode-pets/issues/new?assignees=&labels=feature&template=bug_report.md&title=">Report a Bug</a>
-    ·
-    <a href="https://github.com/tonybaloney/vscode-pets/issues/new?assignees=&labels=feature&template=feature_request.md&title=">Request feature</a>
-</p>
+- Kris
+- Lancer
+- Ralsei
+- Noelle
+- Susie
+- Spamton
+- Jevil
+- Tenna
 
-[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/tonybaloney.vscode-pets?color=blue&logo=visual-studio)](https://marketplace.visualstudio.com/items?itemName=tonybaloney.vscode-pets&WT.mc_id=python-17801-anthonyshaw)
-[![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/tonybaloney.vscode-pets?logo=visualstudio)](https://marketplace.visualstudio.com/items?itemName=tonybaloney.vscode-pets&WT.mc_id=python-17801-anthonyshaw)
-[![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/tonybaloney.vscode-pets?logo=visualstudio)](https://marketplace.visualstudio.com/items?itemName=tonybaloney.vscode-pets&WT.mc_id=python-17801-anthonyshaw)
+All characters use their Dark World presentation. The default display size is
+`medium`; Tenna intentionally renders at twice the scale of the rest of the
+cast to preserve his larger proportions.
 
-![screenshot](https://github.com/tonybaloney/vscode-pets/raw/main/docs/source/_static/winter.gif)
+## Run locally
 
-## Table of Contents
- - [Installation](#installation)
- - [Using VS Code Pets](#using-vs-code-pets)
- - [Translations](#translation)
- - [Credits](#credits)
- - [Thank you](#thank-you)
+1. Open this repository as the workspace in VS Code.
+2. Run `npm install`.
+3. Press `F5` and choose **Run Extension**.
+4. In the Extension Development Host, run
+   **Deltarune Characters: Start Deltarune character session** from the command
+   palette.
 
-## Installation
+Use the `vscode-pets.petType` setting or the spawn-character command to choose
+another member of the cast.
 
-Install this extension from the [VS Code marketplace](https://marketplace.visualstudio.com/items?itemName=tonybaloney.vscode-pets&WT.mc_id=python-17801-anthonyshaw).
+## Development
 
-OR
+```powershell
+npm run compile
+npm test
+```
 
-With VS Code open, search for `vscode-pets` in the extension panel (`Ctrl+Shift+X` on Windows/Linux or `Cmd(⌘)+Shift+X` on MacOS) and click install.
-
-OR
-
-With VS Code open, launch VS Code Quick Open (`Ctrl+P` on Windows/Linux or `Cmd(⌘)+P` on MacOS), paste the following command, and press enter.
-
-`ext install tonybaloney.vscode-pets`
-
-## Using VS Code Pets
-
-Congrats on installing joy! Enjoy interacting with these cute pixelated pets. Read below to get a full understanding of this extension. Not convinced? Watch our extension spotlight on [Visual Studio Code](https://www.youtube.com/watch?v=aE6Ifj_KstI).
-
-After installing, open the command palette with `Ctrl+Shift+P` on Windows/Linux or `Cmd(⌘)+Shift+P` on MacOS.  
-
-Run the "Start pet coding session" command (`vscode-pets.start`) to see a cat in VS Code:
-
-![Default view](https://github.com/tonybaloney/vscode-pets/raw/main/docs/source/_static/pet-in-default-explorer.png)
-
-[Now checkout the documentation to see what else is possible!](https://tonybaloney.github.io/vscode-pets/)
-
-Some important things you can do:
-
-- [Add lots of pets](https://tonybaloney.github.io/vscode-pets/pets/#adding-additional-pets)
-- [Change the background](https://tonybaloney.github.io/vscode-pets/themes/)
-- [Throw a ball and play with the pets](https://tonybaloney.github.io/vscode-pets/pets/#throwing-a-ball)
-
-## Translation
-
-Visit the [Crowdin Project](https://crowdin.com/project/vscode-pets) in case you'd like to help with the translations. It will be synced automatically to the repository. You can also request a new language in the [Discussions](https://crowdin.com/project/vscode-pets/discussions) section.
+The animation build pipeline is in `scripts/build_deltarune_sprites.py`. Source
+credits and links are documented in `docs/deltarune-assets.md`.
 
 ## Credits
 
-The cat animations were designed by [seethingswarm](https://seethingswarm.itch.io/catset). The dog media assets for this extension were designed by [NVPH Studio](https://nvph-studio.itch.io/dog-animation-4-different-dogs). 
+Deltarune and its characters belong to Toby Fox and the Deltarune team. Sprite
+sheets and animation previews are adapted from community rips hosted by
+[The Spriters Resource](https://www.spriters-resource.com/pc_computer/deltarune/).
 
-The winter theme is original artwork by [Kiana Mosser](https://www.instagram.com/kianamosser/) created for VS Code Pets.
-
-The forest theme was designed by [edermunizz](https://edermunizz.itch.io/free-pixel-art-forest). The castle assets were created using artwork by [GuttyKreum](https://guttykreum.itch.io/gothic-castle-game-assets).
-
-[Marc Duiker](https://twitter.com/marcduiker) created the Clippy, Rocky, Zappy, rubber duck, snake, cockatiel, Ferris the crab, and Mod the dotnet bot media assets.
-
-[Elthen](https://twitter.com/pixelthen) created the fox media assets.
-
-[Karen Rustad Tölva](https://www.aldeka.net) designed the original concept of Ferris the crab.
-
-[Kevin Huang](https://github.com/kevin2huang) created the Akita inu media assets.
-
-The turtle animations were designed by enkeefe using [Pixelart](https://www.pixilart.com/draw).
-
-The horse animations were adapted by [Chris Kent](https://github.com/thechriskent) from assets by [Onfe](https://onfe.itch.io/horse-sprite-with-rider-asset-pack). 
-
-[Kennet Shin](https://github.com/WoofWoof0) created the snail media assets.
-
-The frog animations were created by [seethingswarm](https://seethingswarm.itch.io/frogpack).
-
-[Jessie Ferris](https://github.com/jeferris) created the panda media assets.
-
-Squirrel animations were adapted by [Chris Kent](https://github.com/thechriskent) from assets by [Azdner](https://azdner.itch.io/).
-
-Skeleton animations were adapted by [Chris Kent](https://github.com/thechriskent) from assets by [MonoPixelArt](https://monopixelart.itch.io/).
-
-## Thank you
-
-Thanks to all the [contributors](https://github.com/tonybaloney/vscode-pets/graphs/contributors) to this project.
+This project retains the generic movement and interaction engine from the
+open-source VS Code Pets extension.

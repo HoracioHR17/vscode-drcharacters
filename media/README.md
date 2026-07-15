@@ -1,5 +1,7 @@
-# Where are the cats?
+# Deltarune media
 
-The author of the cats has asked that we don't freely distribute the cat assets in GitHub. 
+Character directories in this folder are limited to the eight supported
+Deltarune characters. Every character provides the six animation filenames
+required by the panel engine plus a default icon.
 
-If you want to make custom cat colors or animations, you'll need to buy the [catset](https://seethingswarm.itch.io/catset) on itch and customize it from there.
+See `docs/deltarune-assets.md` for original sprite sources and credits.
