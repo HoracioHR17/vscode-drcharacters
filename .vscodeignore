@@ -11,4 +11,6 @@ src/**
 .build-out/
 coverage/
 docs/
+scripts/**
+tmp/**
 node_modules

@@ -88,7 +88,7 @@ class MockState implements VscodeStateApi {
 mockPanelWindow();
 
 import * as panel from '../../panel/main';
-import { Kris } from '../../panel/pets/kris';
+import { Kris } from '../../panel/pets/deltarune';
 
 suite('Pets Test Suite', () => {
     void vscode.window.showInformationMessage('Start all tests.');

@@ -1,7 +1,7 @@
 import { PetColor, PetSize, PetSpeed, PetType } from '../common/types';
-import { Kris } from './pets/kris';
 import {
     Jevil,
+    Kris,
     Lancer,
     Noelle,
     Ralsei,

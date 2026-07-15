@@ -39,6 +39,17 @@ abstract class DeltarunePet extends BasePetType {
     };
 }
 
+export class Kris extends DeltarunePet {
+    label = 'kris';
+    static possibleColors = [PetColor.darkworld];
+    get emoji() {
+        return '💙';
+    }
+    get hello() {
+        return `The power of fluffy boys shines within you.`;
+    }
+}
+
 export class Lancer extends DeltarunePet {
     label = 'lancer';
     static possibleColors = [PetColor.darkworld];
@@ -116,6 +127,7 @@ export class Tenna extends DeltarunePet {
     }
 }
 
+export const KRIS_NAMES: ReadonlyArray<string> = ['Kris'];
 export const LANCER_NAMES: ReadonlyArray<string> = ['Lancer'];
 export const RALSEI_NAMES: ReadonlyArray<string> = ['Ralsei'];
 export const NOELLE_NAMES: ReadonlyArray<string> = ['Noelle'];

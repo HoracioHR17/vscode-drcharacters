@@ -1,6 +1,6 @@
-import { KRIS_NAMES } from '../panel/pets/kris';
 import {
     JEVIL_NAMES,
+    KRIS_NAMES,
     LANCER_NAMES,
     NOELLE_NAMES,
     RALSEI_NAMES,

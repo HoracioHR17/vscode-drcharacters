@@ -9,6 +9,10 @@ from PIL import Image, ImageDraw, ImageSequence
 CANVAS_SIZE = 220
 MAX_SPRITE_SIZE = 204
 FRAME_DURATION_MS = 83
+# RunState/WalkFast travel 1.6x faster than walk (see src/panel/states.ts).
+# Play the same frames 1.6x quicker so leg cadence matches travel and the
+# sprite stops "skating".
+RUN_DURATION_MS = round(FRAME_DURATION_MS / 1.6)
 SHEET_BACKGROUNDS = {(138, 90, 157), (195, 134, 255)}
 
 
@@ -74,7 +78,11 @@ def ping_pong(frames: list[Image.Image]) -> list[Image.Image]:
     return frames + list(reversed(frames[1:-1]))
 
 
-def save_gif(frames: list[Image.Image], path: Path) -> None:
+def save_gif(
+    frames: list[Image.Image],
+    path: Path,
+    duration: int = FRAME_DURATION_MS,
+) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     first, *rest = frames
     first.save(
@@ -82,7 +90,7 @@ def save_gif(frames: list[Image.Image], path: Path) -> None:
         format='GIF',
         save_all=True,
         append_images=rest,
-        duration=FRAME_DURATION_MS,
+        duration=duration,
         loop=0,
         transparency=0,
         disposal=2,
@@ -100,16 +108,21 @@ def save_character(
     with_ball: list[Image.Image] | None = None,
 ) -> None:
     character_dir = output_dir / name
+    # walk_fast is the 1.6x run state: same frames, faster cadence.
+    # run (ball chase) travels at walk speed, so it keeps the walk cadence.
     states = {
-        'idle': idle,
-        'walk': walk,
-        'walk_fast': run or walk,
-        'run': run or walk,
-        'swipe': swipe or walk,
-        'with_ball': with_ball or [add_ball(frame) for frame in idle],
+        'idle': (idle, FRAME_DURATION_MS),
+        'walk': (walk, FRAME_DURATION_MS),
+        'walk_fast': (run or walk, RUN_DURATION_MS),
+        'run': (run or walk, FRAME_DURATION_MS),
+        'swipe': (swipe or walk, FRAME_DURATION_MS),
+        'with_ball': (
+            with_ball or [add_ball(frame) for frame in idle],
+            FRAME_DURATION_MS,
+        ),
     }
-    for state, frames in states.items():
-        save_gif(frames, character_dir / f'darkworld_{state}_8fps.gif')
+    for state, (frames, duration) in states.items():
+        save_gif(frames, character_dir / f'darkworld_{state}_8fps.gif', duration)
 
     icon = idle[0].copy()
     icon.thumbnail((128, 128), Image.Resampling.NEAREST)
@@ -122,6 +135,22 @@ def build_kris(source_dir: Path, output_dir: Path) -> None:
     kris_walk = ping_pong(load_gif(source_dir / 'kris-walk-right-darkworld.gif'))
     kris_dance = load_gif(source_dir / 'kris-dance.gif')
     save_character(output_dir, 'kris', kris_idle, kris_walk, kris_walk, kris_dance)
+
+
+def build_spamton(source_dir: Path, output_dir: Path) -> None:
+    # Spamton is a battle NPC with no overworld walk cycle on his sheet, so we
+    # reuse animated previews: a 4-frame march for walking and a laugh emote.
+    walk = ping_pong(load_gif(source_dir / 'spamton-walk.gif'))
+    laugh = load_gif(source_dir / 'spamton-laugh.gif')
+    idle = load_gif(source_dir / 'spamton-glitch.gif')  # 2-frame standing talk
+    save_character(output_dir, 'spamton', idle, walk, walk, laugh)
+
+
+def build_jevil(source_dir: Path, output_dir: Path) -> None:
+    # Jevil only has a floating bounce; use the full loop everywhere so nothing
+    # is a frozen single frame.
+    bounce = load_gif(source_dir / 'jevil-dance.gif')
+    save_character(output_dir, 'jevil', bounce, bounce, bounce, bounce)
 
 
 def build(source_dir: Path, output_dir: Path) -> None:
@@ -184,13 +213,8 @@ def build(source_dir: Path, output_dir: Path) -> None:
     susie_eat = load_gif(source_dir / 'susie-eat.gif')
     save_character(output_dir, 'susie', susie_idle, susie_walk, susie_walk, susie_dance, susie_eat)
 
-    spamton_walk = ping_pong(load_gif(source_dir / 'spamton-walk.gif'))
-    spamton_laugh = load_gif(source_dir / 'spamton-laugh.gif')
-    spamton_glitch = load_gif(source_dir / 'spamton-glitch.gif')
-    save_character(output_dir, 'spamton', spamton_laugh, spamton_walk, spamton_walk, spamton_glitch)
-
-    jevil = load_gif(source_dir / 'jevil-dance.gif')
-    save_character(output_dir, 'jevil', jevil[:1], jevil, jevil, jevil)
+    build_spamton(source_dir, output_dir)
+    build_jevil(source_dir, output_dir)
 
     tenna_bow = load_gif(source_dir / 'tenna-bow.gif')
     tenna_dance = load_gif(source_dir / 'tenna-dance.gif')
@@ -199,14 +223,43 @@ def build(source_dir: Path, output_dir: Path) -> None:
     save_character(output_dir, 'tenna', tenna_bow, tenna_dance_cane, tenna_dance, tenna_kick)
 
 
+def load_existing_frames(path: Path) -> list[Image.Image]:
+    """Coalesce an already-built GIF back to full RGBA frames."""
+    with Image.open(path) as source:
+        return [frame.convert('RGBA') for frame in ImageSequence.Iterator(source)]
+
+
+def retime(media_dir: Path) -> None:
+    """Re-derive walk_fast/run from each character's shipped walk cycle so the
+    run state animates 1.6x faster than walk (fixes the "skating" mismatch).
+
+    Used when the hand-cut source sheets are unavailable but the walk frames
+    already live in media/. A full `build` supersedes this."""
+    for walk in sorted(media_dir.glob('*/darkworld_walk_8fps.gif')):
+        char_dir = walk.parent
+        frames = load_existing_frames(walk)
+        save_gif(frames, char_dir / 'darkworld_walk_8fps.gif', FRAME_DURATION_MS)
+        save_gif(frames, char_dir / 'darkworld_walk_fast_8fps.gif', RUN_DURATION_MS)
+        save_gif(frames, char_dir / 'darkworld_run_8fps.gif', FRAME_DURATION_MS)
+        print(f'retimed {char_dir.name}: {len(frames)} frames')
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description='Build VS Code Deltarune character GIFs')
     parser.add_argument('--source-dir', type=Path, default=Path('tmp/deltarune-sources'))
     parser.add_argument('--output-dir', type=Path, default=Path('media'))
-    parser.add_argument('--character', choices=('all', 'kris'), default='all')
+    builders = {'kris': build_kris, 'spamton': build_spamton, 'jevil': build_jevil}
+    parser.add_argument('--character', choices=('all', *builders), default='all')
+    parser.add_argument(
+        '--retime',
+        action='store_true',
+        help='Re-derive walk_fast/run from shipped walk GIFs (no source sheets needed)',
+    )
     args = parser.parse_args()
-    if args.character == 'kris':
-        build_kris(args.source_dir, args.output_dir)
+    if args.retime:
+        retime(args.output_dir)
+    elif args.character in builders:
+        builders[args.character](args.source_dir, args.output_dir)
     else:
         build(args.source_dir, args.output_dir)
 
